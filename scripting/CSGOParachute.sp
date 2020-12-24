@@ -26,19 +26,19 @@ bool g_bClientPressingUse[MAXPLAYERS+1] = {false, ...};
 
 public Plugin myinfo = {
 	name = "[CS:GO] Parachute Manager",
-	author = "SHUFEN from POSSESSION.tokyo fixed by Sarrus",
+	author = "SHUFEN from POSSESSION.tokyo",
 	description = "Allows player to use CS:GO internal parachute",
 	version = "2.0",
-	url = ""
+	url = "https://possession.tokyo"
 };
 
 //----------------------------------------------------------------------------------------------------
 // Purpose: General
 //----------------------------------------------------------------------------------------------------
 public void OnPluginStart() {
-	Handle hGameConf = LoadGameConfigFile("SimpleParachuteGiver.games");
+	Handle hGameConf = LoadGameConfigFile("CSGOParachute.games");
 	if (hGameConf == INVALID_HANDLE) {
-		SetFailState("Couldn't load SimpleParachuteGiver.games game config!");
+		SetFailState("Couldn't load Parachute.games game config!");
 		return;
 	}
 
@@ -63,12 +63,9 @@ public void OnPluginStart() {
 	HookEvent("player_spawn", Event_PlayerSpawnPost, EventHookMode_Post);
 
 	ConVar cvar;
-	(cvar = CreateConVar("sm_parachute_enabled", "-1", "Enable/Disable this plugin [-1: Enabled Anytime, 0: Disabled, 1: Allows Command, 2: Allows Specific Buttons]", _, true, -1.0, true, 2.0)).AddChangeHook(OnConVarChanged_Enable);
+	(cvar = CreateConVar("sm_parachute_enabled", "2", "Enable/Disable this plugin [-1: Enabled Anytime, 0: Disabled, 1: Allows Command, 2: Allows Specific Buttons]", _, true, -1.0, true, 2.0)).AddChangeHook(OnConVarChanged_Enable);
 	g_iParachuteEnabled = cvar.IntValue;
-	(cvar = CreateConVar("sm_parachute_buttons", "0", "Enable/Disable buttons [Flags> 0: None, 1: Jump, 2: LookAtWeapon, 4: Use | e.g. 5 = Jump + Use, 7 = All]", _, true, 0.0, true, 7.0)).AddChangeHook(OnConVarChanged_Buttons);
-	
-	AutoExecConfig(true, "SimpleParachuteGiver");
-	
+	(cvar = CreateConVar("sm_parachute_buttons", "1", "Enable/Disable buttons [Flags> 0: None, 1: Jump, 2: LookAtWeapon, 4: Use | e.g. 5 = Jump + Use, 7 = All]", _, true, 0.0, true, 7.0)).AddChangeHook(OnConVarChanged_Buttons);
 	g_iButtonsEnabled = cvar.IntValue;
 	delete cvar;
 
