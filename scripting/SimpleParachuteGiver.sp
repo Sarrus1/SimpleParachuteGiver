@@ -128,8 +128,8 @@ public void Event_PlayerSpawnPost(Event event, const char[] name, bool dontBroad
 stock void EquipParachute(int client, bool sounds = false) {
 		SDKCall(g_hEquipParachute, client);
 		if (sounds) {
-			EmitSoundToAll(Survival_ParachuteEquipped, client, SNDCHAN_STATIC, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
-			EmitSoundToAll(Survival_ItemPickup, client, SNDCHAN_STATIC, SNDLEVEL_CAR, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+			//EmitSoundToAll(Survival_ParachuteEquipped, client, SNDCHAN_STATIC, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+			//EmitSoundToAll(Survival_ItemPickup, client, SNDCHAN_STATIC, SNDLEVEL_CAR, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
 		}
 		Event event = CreateEvent("parachute_pickup");
 		if (event != null) {
